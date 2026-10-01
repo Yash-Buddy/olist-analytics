@@ -1,125 +1,154 @@
-<!DOCTYPE html><html><head><meta charset="utf-8">
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Olist E-commerce Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 <style>
-body{background:radial-gradient(circle at 15% 0%,#12343b,#0a0d14 55%) fixed;color:#e8eaf0}
-.glass{background:rgba(255,255,255,.05);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);border-radius:18px}
-.grad{background:linear-gradient(90deg,#3ddc97,#6c8cff,#f5a623);-webkit-background-clip:text;color:transparent}
-.chart{height:320px}
+:root{--ink:#19183b;--lime:#d3ee63;--sage:#dfe9de;--peach:#f9e9d9;--blue:#e1e8f5;--grey:#ececec;--green:#84c986;--sky:#6bb3e8}
+html{scroll-behavior:smooth}
+body{background:var(--lime);color:var(--ink);font-family:'Outfit',sans-serif;padding:26px 12px}
+.wrap{max-width:1180px;margin:auto;background:#fff;border-radius:24px;padding:26px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+.pnav{background:var(--grey);border-radius:999px;padding:6px;display:flex;gap:2px;overflow-x:auto}
+.pnav a{padding:9px 20px;border-radius:999px;font-size:15px;white-space:nowrap}
+.pnav a.on{background:var(--ink);color:#fff}
+.big{font-weight:300;letter-spacing:-.03em;line-height:1}
+.big sup{font-size:.27em;font-weight:400;margin-left:4px;vertical-align:top;position:relative;top:.5em;letter-spacing:0}
+.tile{border-radius:8px;padding:20px 22px;position:relative;min-height:215px;display:flex;flex-direction:column}
+.tile h2{font-size:17px;line-height:1.2;font-weight:400;max-width:70%}
+.tile .sub{font-size:13px;opacity:.65;margin-top:3px}
+.tile .push{margin-top:auto}
+.go{position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:50%;background:#fff;color:var(--ink);display:grid;place-items:center;font-size:18px}
+.tg{border:1px solid rgba(255,255,255,.4);color:#fff;border-radius:999px;padding:6px 16px;font-size:14px;background:none;cursor:pointer}
+.tg.on{background:#fff;color:var(--ink)}
+.steps{display:flex;overflow-x:auto;padding:4px 2px 6px}
+.st{flex:1;min-width:112px;position:relative;font-size:14px;line-height:1.25}
+.st i{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--green);color:#fff;font-style:normal;font-size:13px;margin-bottom:10px;position:relative;z-index:1}
+.st:not(:last-child)::after{content:'';position:absolute;top:12px;left:30px;right:4px;height:2px;background:var(--green)}
+.st.now i{background:#fff;border:3px solid var(--sky);color:var(--sky);box-shadow:0 0 0 4px #e3f1fb}
 </style></head>
-<body class="font-sans"><main class="max-w-6xl mx-auto px-5 py-10">
+<body>
+<div class="wrap" id="top">
 
-<header class="text-center mb-10">
-  <p class="text-sm tracking-widest text-emerald-400 mb-2">MYSQL STAR SCHEMA → PYTHON → ECHARTS</p>
-  <h1 class="text-5xl font-extrabold grad">Olist E-commerce Analytics</h1>
-  <p class="text-gray-400 mt-3">Brazilian marketplace orders, 2017 to 2018. Currency is Brazilian real (R$).</p>
+<header class="flex items-center justify-between gap-4 flex-wrap">
+  <b class="text-2xl" style="font-weight:600;letter-spacing:-.03em">olist<span style="color:var(--green)">.</span>analytics</b>
+  <nav class="pnav" id="nav" aria-label="Sections">
+    <a class="on" href="#top">Overview</a><a href="#rev">Sales</a><a href="#cat">Categories</a><a href="#cus">Customers</a><a href="#sel">Sellers</a>
+  </nav>
+  <a class="go" style="position:static;background:var(--grey)" href="https://github.com/Yash-Buddy/olist-analytics" target="_blank" rel="noopener" aria-label="Open the GitHub repository">↗</a>
 </header>
 
-<section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-  <div class="glass p-5 text-center"><b id="k1" class="text-3xl text-emerald-400">-</b><p class="text-xs text-gray-400">Revenue</p></div>
-  <div class="glass p-5 text-center"><b id="k2" class="text-3xl text-blue-400">-</b><p class="text-xs text-gray-400">Orders</p></div>
-  <div class="glass p-5 text-center"><b id="k3" class="text-3xl text-amber-400">-</b><p class="text-xs text-gray-400">Unique customers</p></div>
-  <div class="glass p-5 text-center"><b id="k4" class="text-3xl text-pink-400">-</b><p class="text-xs text-gray-400">Avg review (of 5)</p></div>
+<section class="grid grid-cols-2 lg:grid-cols-5 gap-x-6 gap-y-8 mt-10 items-end">
+  <h1 class="col-span-2 lg:col-span-1 text-4xl leading-tight"><span style="font-weight:300">Olist E-commerce</span><br><b style="font-weight:600">Analytics</b></h1>
+  <div><p class="text-sm opacity-70 mb-2">Total revenue</p><div id="k1" class="big text-5xl">–</div></div>
+  <div><p class="text-sm opacity-70 mb-2">Orders placed</p><div id="k2" class="big text-5xl">–</div></div>
+  <div><p class="text-sm opacity-70 mb-2">Unique customers</p><div id="k3" class="big text-5xl">–</div></div>
+  <div><p class="text-sm opacity-70 mb-2">Average review</p><div id="k4" class="big text-5xl">–</div></div>
+</section>
+<p id="err" class="mt-4 text-sm" style="color:#c0392b"></p>
+
+<section class="steps mt-10" aria-label="How the data got here">
+  <div class="st"><i>✓</i>CSV files</div><div class="st"><i>✓</i>Staging tables</div><div class="st"><i>✓</i>Clean tables</div>
+  <div class="st"><i>✓</i>Star schema</div><div class="st"><i>✓</i>SQL views</div><div class="st"><i>✓</i>JSON export</div>
+  <div class="st now"><i>…</i>Live dashboard</div>
 </section>
 
-<h2 class="text-3xl font-bold mb-1">📈 Revenue</h2>
-<p class="text-gray-400 mb-5">How sales grew and what sold.</p>
-<div class="grid md:grid-cols-2 gap-5 mb-12">
-  <div class="glass p-4"><h3 class="font-semibold">Monthly revenue</h3><p class="text-xs text-gray-400">Jan 2017 to Aug 2018, hover for growth vs previous month</p><div id="c1" class="chart"></div></div>
-  <div class="glass p-4"><h3 class="font-semibold">Top 10 categories</h3><p class="text-xs text-gray-400">Total revenue, R$</p><div id="c2" class="chart"></div></div>
-</div>
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3 mt-8">
+  <div id="rev" class="tile md:col-span-2 lg:col-span-6 lg:row-span-2" style="background:var(--ink);color:#fff">
+    <h2 style="font-size:24px">Monthly sales</h2><p class="sub" id="range"></p>
+    <div class="flex gap-2 mt-4"><button class="tg on" data-k="value">Revenue</button><button class="tg" data-k="orders">Orders</button></div>
+    <p id="lg" class="sub mt-3"></p>
+    <div id="dm" class="push pt-4"></div>
+    <a class="go" href="#cat" aria-label="See top categories">↘</a>
+  </div>
+  <div class="tile lg:col-span-3" style="background:var(--sage)"><h2>Average order value</h2><a class="go" href="#cat" aria-label="See categories">↗</a>
+    <div id="v1" class="big push text-6xl">–</div></div>
+  <div class="tile lg:col-span-3" style="background:var(--peach)"><h2>Top 4 categories</h2><a class="go" href="#cat" aria-label="See categories">↗</a>
+    <div id="v2" class="push"></div></div>
+  <div class="tile lg:col-span-3" style="background:var(--blue)"><h2>Customers who buy again</h2><a class="go" href="#cus" aria-label="See retention">↗</a>
+    <div class="push"><div id="v3" class="big text-6xl">–</div><p class="sub">of a cohort, one month after first order</p></div></div>
+  <div class="tile lg:col-span-3" style="background:var(--grey)"><h2>Delivery vs promised date</h2><a class="go" href="#sel" aria-label="See sellers">↗</a>
+    <div class="push"><div id="v4" class="big text-6xl">–</div><p class="sub">average across all sellers</p></div></div>
 
-<h2 class="text-3xl font-bold mb-1">👥 Customers</h2>
-<p class="text-gray-400 mb-5">Who buys, and whether they come back.</p>
-<div class="grid md:grid-cols-2 gap-5 mb-12">
-  <div class="glass p-4"><h3 class="font-semibold">RFM segments</h3><p class="text-xs text-gray-400">Recency, frequency, monetary scoring with NTILE</p><div id="c3" class="chart"></div></div>
-  <div class="glass p-4"><h3 class="font-semibold">Cohort retention heatmap</h3><p class="text-xs text-gray-400">% of a cohort buying again, by months since first order</p><div id="c4" class="chart"></div></div>
-</div>
+  <div id="cat" class="tile lg:col-span-5 md:col-span-2" style="background:var(--sage)"><h2>Top 10 categories</h2><p class="sub">Total revenue, R$ thousands</p><div id="c2" style="height:330px" class="push"></div></div>
+  <div class="tile lg:col-span-3" style="background:var(--peach)"><h2>Customer groups</h2><p class="sub">RFM: recency, frequency, spend</p><div id="c3" style="height:330px" class="push"></div></div>
+  <div id="cus" class="tile lg:col-span-4 md:col-span-2" style="background:var(--blue)"><h2>Retention by cohort</h2><p class="sub">% buying again, months after first order</p><div id="c4" style="height:330px" class="push"></div></div>
 
-<h2 class="text-3xl font-bold mb-1">📦 Products & sellers</h2>
-<p class="text-gray-400 mb-5">Where the money concentrates, and who delivers late.</p>
-<div class="grid md:grid-cols-2 gap-5 mb-5">
-  <div class="glass p-4"><h3 class="font-semibold">ABC analysis</h3><p class="text-xs text-gray-400">Revenue by class: A = first 80%, B = next 15%, C = last 5%</p><div id="c5" class="chart"></div></div>
-  <div class="glass p-4"><h3 class="font-semibold">Seller delivery vs estimate</h3><p class="text-xs text-gray-400">Avg days late (negative = early), sellers in 4 quartiles</p><div id="c6" class="chart"></div></div>
-</div>
-<div class="glass p-5 mb-12"><h3 class="font-semibold mb-3">Top 3 categories per year</h3><div id="yr" class="grid md:grid-cols-3 gap-4 text-sm"></div></div>
-
-<section class="glass p-6 mb-8">
-  <h2 class="text-xl font-bold mb-2">🛠️ What I solved</h2>
-  <ul class="text-gray-300 text-sm space-y-1 list-disc ml-5">
-    <li>Rebuilt a Kaggle T-SQL blueprint in MySQL: staging, clean tables, star schema, views.</li>
-    <li>Fixed payment double-counting by using two fact tables at different grains (per item and per order).</li>
-    <li>Fixed RFM logic: frequency scored with CASE (most customers ordered once), unreachable segment rule, hardcoded date.</li>
-    <li>Found that retention is under 1% a month after first order, so repeat purchase is the real problem.</li>
-    <li>Used window functions: ROW_NUMBER, RANK with PARTITION BY, LAG, NTILE, running totals.</li>
-  </ul>
+  <div class="tile lg:col-span-4" style="background:var(--grey)"><h2>Revenue by ABC class</h2><p class="sub">A = first 80% of revenue, B = next 15%, C = last 5%</p><div id="c5" style="height:280px" class="push"></div></div>
+  <div id="sel" class="tile lg:col-span-4" style="background:var(--sage)"><h2>Sellers: days vs estimate</h2><p class="sub">4 equal groups. Below zero is early.</p><div id="c6" style="height:280px" class="push"></div></div>
+  <div class="tile lg:col-span-4 md:col-span-2" style="background:var(--peach)"><h2>Top 3 categories each year</h2><div id="yr" class="push space-y-4 text-[15px]"></div></div>
 </section>
-<footer class="text-center text-gray-500 text-xs pb-6">Built by Yash · MySQL · Python · ECharts · Inspired by a Kaggle notebook on the Olist dataset</footer>
-</main>
+
+<footer class="mt-8 text-sm opacity-70 max-w-3xl">Built by Yash with MySQL, Python and ECharts. Inspired by a Kaggle T-SQL notebook, rebuilt in MySQL. Fixed along the way: payments counted twice, RFM scoring rules, hardcoded dates.</footer>
+</div>
 
 <script>
-const P=["#3ddc97","#6c8cff","#f5a623","#ff6b9d","#b88cff","#4dd0e1"];
-const J=u=>fetch(u).then(r=>r.json());
-const mk=(id,o)=>{const c=echarts.init(document.getElementById(id),"dark");
-  c.setOption({backgroundColor:"transparent",color:P,animationDuration:1000,...o});
-  addEventListener("resize",()=>c.resize());};
-const n=x=>Number(x).toLocaleString();
+const INK='#19183b',GREEN='#84c986',SKY='#6bb3e8',SAND='#b8ad9f',CORAL='#ee8f76',GRID='rgba(25,24,59,.12)';
+const $=id=>document.getElementById(id),N=x=>Math.round(x).toLocaleString('en-US'),clean=s=>s.replace(/_/g,' ');
+const AX={axisLine:{lineStyle:{color:GRID}},axisTick:{show:false},axisLabel:{color:INK,fontSize:11},splitLine:{lineStyle:{color:GRID}}};
+const base={backgroundColor:'transparent',color:[INK,GREEN,SKY,SAND,CORAL,'#f2c14e'],textStyle:{fontFamily:'Outfit',color:INK},animationDuration:800,
+  tooltip:{backgroundColor:'#fff',borderColor:GRID,textStyle:{color:INK}}};
+function mk(id,o){const c=echarts.init($(id));c.setOption(base);c.setOption(o);addEventListener('resize',()=>c.resize())}
+function up(el,to,fmt){const calm=matchMedia('(prefers-reduced-motion:reduce)').matches;let s=null;
+  (function f(t){if(s===null)s=t;const p=calm?1:Math.min((t-s)/1100,1);el.innerHTML=fmt(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(performance.now())}
+document.querySelectorAll('#nav a').forEach(a=>a.onclick=()=>{document.querySelectorAll('#nav a').forEach(x=>x.classList.remove('on'));a.classList.add('on')});
 
-J("data/kpis.json").then(([k])=>{
-  k1.textContent="R$"+(k.revenue/1e6).toFixed(1)+"M";
-  k2.textContent=n(k.orders); k3.textContent=n(k.customers); k4.textContent=k.avg_review;
-});
+const names=['kpis','monthly_revenue','top_categories','categories_by_year','rfm_segments','cohort','abc','seller_quartiles'];
+Promise.all(names.map(n=>fetch('data/'+n+'.json').then(r=>{if(!r.ok)throw n;return r.json()})))
+ .then(render).catch(n=>{$('err').textContent='Could not load data/'+n+'.json. Start the server inside the viz folder: python3 -m http.server'});
 
-J("data/monthly_revenue.json").then(d=>mk("c1",{
-  tooltip:{trigger:"axis",formatter:p=>{const r=d[p[0].dataIndex];
-    return `<b>${r.label}</b><br>R$${n(r.value)}<br>${n(r.orders)} orders<br>vs prev month: ${r.mom_growth_pct??"-"}%`}},
-  grid:{left:60,right:15,top:15,bottom:50},
-  xAxis:{type:"category",data:d.map(r=>r.label),axisLabel:{rotate:45,fontSize:10}},yAxis:{type:"value"},
-  series:[{type:"line",smooth:true,symbolSize:7,lineStyle:{width:3},data:d.map(r=>r.value),
-    areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:"#3ddc9988"},{offset:1,color:"#3ddc9900"}])}}]}));
+function render([[k],mon,cat,yrs,rfm,coh,abc,sel]){
+  const m1l=coh.filter(r=>r.month_index===1),m1=m1l.reduce((s,r)=>s+r.retention_pct,0)/m1l.length;
+  up($('k1'),k.revenue/1e6,v=>v.toFixed(1)+'<sup>M R$</sup>');up($('k2'),k.orders,N);up($('k3'),k.customers,N);up($('k4'),k.avg_review,v=>v.toFixed(2)+'<sup>/ 5</sup>');
+  $('v1').innerHTML=N(k.revenue/k.orders)+'<sup>R$ / order</sup>';
+  $('v3').innerHTML=m1.toFixed(1)+'<sup>% / month</sup>';
+  const tw=sel.reduce((s,r)=>s+r.sellers,0),av=sel.reduce((s,r)=>s+r.value*r.sellers,0)/tw;
+  $('v4').innerHTML=Math.abs(av).toFixed(0)+'<sup>days '+(av<0?'early':'late')+'</sup>';
+  $('range').textContent=`All orders, ${mon[0].label} to ${mon[mon.length-1].label}`;
 
-J("data/top_categories.json").then(d=>mk("c2",{
-  tooltip:{formatter:p=>`<b>${p.name}</b><br>R$${n(p.value)}`},
-  grid:{left:120,right:50,top:5,bottom:5},xAxis:{type:"value",show:false},
-  yAxis:{type:"category",inverse:true,data:d.map(r=>r.label),axisLabel:{fontSize:10}},
-  series:[{type:"bar",barWidth:16,data:d.map(r=>r.value),itemStyle:{borderRadius:[0,8,8,0],
-    color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:"#6c8cff"},{offset:1,color:"#3ddc97"}])},
-    label:{show:true,position:"right",color:"#ccc",fontSize:10,formatter:p=>(p.value/1e3).toFixed(0)+"k"}}]}));
+  const t4=cat.slice(0,4),mx=t4[0].value,cl=[SAND,'#cfc6b8',GREEN,SKY];
+  $('v2').innerHTML='<div class="flex items-end gap-2" style="height:120px">'+t4.map((r,i)=>`<div class="flex-1 flex flex-col justify-end h-full min-w-0"><span class="text-xs mb-1">${(r.value/1e3).toFixed(0)}k</span><div style="height:${Math.round(r.value/mx*78)}%;background:${cl[i]}"></div></div>`).join('')+
+    '</div><div class="flex gap-2 mt-1 text-[10px] opacity-70">'+t4.map(r=>`<span class="flex-1 truncate">${clean(r.label)}</span>`).join('')+'</div>';
 
-J("data/rfm_segments.json").then(d=>mk("c3",{
-  tooltip:{formatter:p=>{const r=d[p.dataIndex];return `<b>${r.label}</b><br>${n(r.value)} customers<br>avg spend R$${n(r.avg_spend)}`}},
-  legend:{bottom:0,textStyle:{fontSize:10}},
-  series:[{type:"pie",radius:["40%","68%"],center:["50%","44%"],itemStyle:{borderRadius:6,borderColor:"#0a0d14",borderWidth:2},
-    label:{color:"#ddd",fontSize:10},data:d.map(r=>({name:r.label,value:r.value}))}]}));
+  function dots(key){
+    const v=mon.map(r=>r[key]),R=12,c=26,step=Math.max(...v)/R,W=mon.length*c,H=R*c+22,rev=key==='value';
+    let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Monthly ${rev?'revenue':'orders'} drawn as stacks of dots">`;
+    v.forEach((x,i)=>{const lv=Math.round(x/step),cx=i*c+c/2;s+=`<g><title>${mon[i].label}: ${rev?'R$':''}${N(x)}</title>`;
+      for(let r=0;r<R;r++){const cy=(R-1-r)*c+c/2;s+=r<lv?`<circle cx="${cx}" cy="${cy}" r="9.5" fill="${GREEN}"/>`:`<circle cx="${cx}" cy="${cy}" r="9" fill="none" stroke="rgba(255,255,255,.25)"/>`}
+      if(i%3===0)s+=`<text x="${cx}" y="${H-4}" fill="#fff" fill-opacity=".6" font-size="9" text-anchor="middle">${mon[i].label.slice(5)}/${mon[i].label.slice(2,4)}</text>`;s+='</g>'});
+    $('dm').innerHTML=s+'</svg>';$('lg').textContent=`Each dot is ${rev?'R$':''}${N(step)}${rev?'':' orders'}. Hover a column for the exact value.`;
+  }
+  dots('value');
+  document.querySelectorAll('.tg').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tg').forEach(x=>x.classList.remove('on'));b.classList.add('on');dots(b.dataset.k)});
 
-J("data/cohort.json").then(d=>{
-  const co=[...new Set(d.map(r=>r.cohort))], mo=[...Array(12)].map((_,i)=>i+1);
-  mk("c4",{tooltip:{formatter:p=>`Cohort ${co[p.data[1]].slice(0,7)}<br>Month ${mo[p.data[0]]}: <b>${p.data[2]}%</b>`},
-    grid:{left:70,right:15,top:10,bottom:55},
-    xAxis:{type:"category",data:mo,name:"months after first order",nameLocation:"middle",nameGap:28},
-    yAxis:{type:"category",data:co.map(c=>c.slice(0,7)),axisLabel:{fontSize:9}},
-    visualMap:{min:0,max:Math.max(...d.map(r=>r.retention_pct)),orient:"horizontal",left:"center",bottom:0,
-      inRange:{color:["#14213d","#6c8cff","#3ddc97","#f5a623"]},textStyle:{color:"#ccc"},itemWidth:10,itemHeight:100},
-    series:[{type:"heatmap",data:d.map(r=>[mo.indexOf(r.month_index),co.indexOf(r.cohort),r.retention_pct]),
-      itemStyle:{borderColor:"#0a0d14",borderWidth:1}}]});
-});
+  mk('c2',{tooltip:{formatter:p=>`<b>${clean(p.name)}</b><br>R$${N(p.value)}`},grid:{left:120,right:44,top:4,bottom:4},
+    xAxis:{type:'value',show:false},yAxis:{...AX,type:'category',inverse:true,data:cat.map(r=>clean(r.label)),splitLine:{show:false},axisLine:{show:false}},
+    series:[{type:'bar',barWidth:16,data:cat.map(r=>r.value),itemStyle:{color:INK,borderRadius:[0,4,4,0]},label:{show:true,position:'right',color:INK,formatter:p=>(p.value/1e3).toFixed(0)+'k'}}]});
 
-J("data/abc.json").then(d=>mk("c5",{
-  tooltip:{formatter:p=>{const r=d[p.dataIndex];return `<b>Class ${r.label}</b><br>${r.value} categories<br>R$${n(r.revenue)}`}},
-  grid:{left:70,right:15,top:20,bottom:30},xAxis:{type:"category",data:d.map(r=>"Class "+r.label+" ("+r.value+" cats)")},yAxis:{type:"value"},
-  series:[{type:"bar",barWidth:60,data:d.map((r,i)=>({value:r.revenue,itemStyle:{color:[P[0],P[1],P[2]][i],borderRadius:[10,10,0,0]}})),
-    label:{show:true,position:"top",color:"#fff",formatter:p=>"R$"+(p.value/1e6).toFixed(1)+"M"}}]}));
+  mk('c3',{tooltip:{formatter:p=>{const r=rfm[p.dataIndex];return `<b>${r.label}</b><br>${N(r.value)} customers<br>average spend R$${N(r.avg_spend)}`}},
+    legend:{bottom:0,textStyle:{color:INK,fontSize:11}},
+    series:[{type:'pie',radius:['44%','68%'],center:['50%','42%'],itemStyle:{borderColor:'#f9e9d9',borderWidth:3},label:{show:false},data:rfm.map(r=>({name:r.label,value:r.value}))}]});
 
-J("data/seller_quartiles.json").then(d=>mk("c6",{
-  tooltip:{formatter:p=>{const r=d[p.dataIndex];return `<b>${r.label}</b><br>${r.sellers} sellers<br>avg ${r.value} days vs estimate`}},
-  grid:{left:50,right:15,top:20,bottom:30},xAxis:{type:"category",data:d.map(r=>r.label+" ("+r.sellers+" sellers)")},yAxis:{type:"value",name:"days"},
-  series:[{type:"bar",barWidth:50,data:d.map(r=>({value:r.value,itemStyle:{color:r.value<0?P[0]:P[3],borderRadius:[8,8,0,0]}})),
-    label:{show:true,position:"top",color:"#fff"}}]}));
+  const co=[...new Set(coh.map(r=>r.cohort))],mo=[...Array(12)].map((_,i)=>i+1);
+  mk('c4',{tooltip:{formatter:p=>`Cohort ${co[p.data[1]].slice(0,7)}<br>Month ${mo[p.data[0]]}: <b>${p.data[2]}%</b>`},grid:{left:58,right:6,top:4,bottom:64},
+    xAxis:{type:'category',data:mo,name:'months after first order',nameLocation:'middle',nameGap:24,axisLabel:{color:INK,fontSize:10},axisLine:{show:false},axisTick:{show:false}},
+    yAxis:{type:'category',data:co.map(c=>c.slice(0,7)),axisLabel:{color:INK,fontSize:9},axisLine:{show:false},axisTick:{show:false}},
+    visualMap:{min:0,max:Math.max(...coh.map(r=>r.retention_pct)),orient:'horizontal',left:'center',bottom:0,itemWidth:10,itemHeight:100,textStyle:{color:INK},inRange:{color:['#ffffff','#bcd6f3',SKY,INK]}},
+    series:[{type:'heatmap',data:coh.map(r=>[mo.indexOf(r.month_index),co.indexOf(r.cohort),r.retention_pct]),itemStyle:{borderColor:'#e1e8f5',borderWidth:2}}]});
 
-J("data/categories_by_year.json").then(d=>{
-  yr.innerHTML=[...new Set(d.map(r=>r.year))].map(y=>`<div><p class="font-bold text-emerald-400 mb-1">${y}</p>`+
-    d.filter(r=>r.year===y).map(r=>`<p>${r.rnk}. ${r.category} <span class="text-gray-400">R$${n(r.revenue)}</span></p>`).join("")+`</div>`).join("");
-});
+  mk('c5',{tooltip:{formatter:p=>{const r=abc[p.dataIndex];return `<b>Class ${r.label}</b><br>${r.value} categories<br>R$${N(r.revenue)}`}},grid:{left:10,right:10,top:30,bottom:30},
+    xAxis:{...AX,type:'category',data:abc.map(r=>`Class ${r.label} (${r.value})`),splitLine:{show:false}},yAxis:{type:'value',show:false},
+    series:[{type:'bar',barWidth:46,data:abc.map((r,i)=>({value:r.revenue,itemStyle:{color:[INK,GREEN,SKY][i],borderRadius:[6,6,0,0]}})),label:{show:true,position:'top',color:INK,formatter:p=>'R$'+(p.value/1e6).toFixed(1)+'M'}}]});
+
+  const dd=v=>Math.abs(v)+' days '+(v<0?'early':'late');
+  mk('c6',{tooltip:{formatter:p=>{const r=sel[p.dataIndex];return `<b>${r.label}</b><br>${r.sellers} sellers<br>${dd(r.value)}`}},grid:{left:40,right:10,top:30,bottom:30},
+    xAxis:{...AX,type:'category',data:sel.map(r=>`${r.label} (${r.sellers})`),splitLine:{show:false}},yAxis:{...AX,type:'value',name:'days',nameTextStyle:{color:INK}},
+    series:[{type:'bar',barWidth:40,data:sel.map(r=>({value:r.value,itemStyle:{color:r.value<0?GREEN:CORAL,borderRadius:[6,6,0,0]}})),label:{show:true,position:'top',color:INK}}]});
+
+  $('yr').innerHTML=[...new Set(yrs.map(r=>r.year))].map(y=>`<div><p class="big text-3xl mb-1">${y}</p>`+
+    yrs.filter(r=>r.year===y).map(r=>`<p class="flex justify-between gap-3"><span>${r.rnk}. ${clean(r.category)}</span><span class="opacity-60">R$${N(r.revenue)}</span></p>`).join('')+'</div>').join('');
+}
 </script></body></html>
