@@ -5,7 +5,7 @@ A MySQL star schema and SQL analytics project on the Brazilian Olist marketplace
 **Live dashboard:** https://yash-buddy.github.io/olist-analytics/viz/
 
 ![Dashboard](docs/dashboard.png)
-![Dashboard](docs/dashboard2.png)
+![Dashboard](docs/dashboard.png)
 
 ## Pipeline
 
