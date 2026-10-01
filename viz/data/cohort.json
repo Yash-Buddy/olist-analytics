@@ -1,0 +1,757 @@
+[
+  {
+    "cohort": "2017-01-01",
+    "month_index": 1,
+    "retention_pct": 0.28
+  },
+  {
+    "cohort": "2017-01-01",
+    "month_index": 2,
+    "retention_pct": 0.28
+  },
+  {
+    "cohort": "2017-01-01",
+    "month_index": 3,
+    "retention_pct": 0.14
+  },
+  {
+    "cohort": "2017-01-01",
+    "month_index": 4,
+    "retention_pct": 0.42
+  },
+  {
+    "cohort": "2017-01-01",
+    "month_index": 5,
+    "retention_pct": 0.14
+  },
+  {
+    "cohort": "2017-01-01",
+    "month_index": 6,
+    "retention_pct": 0.42
+  },
+  {
+    "cohort": "2017-01-01",
+    "month_index": 7,
+    "retention_pct": 0.14
+  },
+  {
+    "cohort": "2017-01-01",
+    "month_index": 8,
+    "retention_pct": 0.14
+  },
+  {
+    "cohort": "2017-01-01",
+    "month_index": 10,
+    "retention_pct": 0.42
+  },
+  {
+    "cohort": "2017-01-01",
+    "month_index": 11,
+    "retention_pct": 0.14
+  },
+  {
+    "cohort": "2017-01-01",
+    "month_index": 12,
+    "retention_pct": 0.7
+  },
+  {
+    "cohort": "2017-02-01",
+    "month_index": 1,
+    "retention_pct": 0.18
+  },
+  {
+    "cohort": "2017-02-01",
+    "month_index": 2,
+    "retention_pct": 0.31
+  },
+  {
+    "cohort": "2017-02-01",
+    "month_index": 3,
+    "retention_pct": 0.12
+  },
+  {
+    "cohort": "2017-02-01",
+    "month_index": 4,
+    "retention_pct": 0.43
+  },
+  {
+    "cohort": "2017-02-01",
+    "month_index": 5,
+    "retention_pct": 0.12
+  },
+  {
+    "cohort": "2017-02-01",
+    "month_index": 6,
+    "retention_pct": 0.25
+  },
+  {
+    "cohort": "2017-02-01",
+    "month_index": 7,
+    "retention_pct": 0.18
+  },
+  {
+    "cohort": "2017-02-01",
+    "month_index": 8,
+    "retention_pct": 0.12
+  },
+  {
+    "cohort": "2017-02-01",
+    "month_index": 9,
+    "retention_pct": 0.18
+  },
+  {
+    "cohort": "2017-02-01",
+    "month_index": 10,
+    "retention_pct": 0.12
+  },
+  {
+    "cohort": "2017-02-01",
+    "month_index": 11,
+    "retention_pct": 0.31
+  },
+  {
+    "cohort": "2017-02-01",
+    "month_index": 12,
+    "retention_pct": 0.12
+  },
+  {
+    "cohort": "2017-03-01",
+    "month_index": 1,
+    "retention_pct": 0.44
+  },
+  {
+    "cohort": "2017-03-01",
+    "month_index": 2,
+    "retention_pct": 0.36
+  },
+  {
+    "cohort": "2017-03-01",
+    "month_index": 3,
+    "retention_pct": 0.4
+  },
+  {
+    "cohort": "2017-03-01",
+    "month_index": 4,
+    "retention_pct": 0.36
+  },
+  {
+    "cohort": "2017-03-01",
+    "month_index": 5,
+    "retention_pct": 0.16
+  },
+  {
+    "cohort": "2017-03-01",
+    "month_index": 6,
+    "retention_pct": 0.16
+  },
+  {
+    "cohort": "2017-03-01",
+    "month_index": 7,
+    "retention_pct": 0.32
+  },
+  {
+    "cohort": "2017-03-01",
+    "month_index": 8,
+    "retention_pct": 0.32
+  },
+  {
+    "cohort": "2017-03-01",
+    "month_index": 9,
+    "retention_pct": 0.08
+  },
+  {
+    "cohort": "2017-03-01",
+    "month_index": 10,
+    "retention_pct": 0.36
+  },
+  {
+    "cohort": "2017-03-01",
+    "month_index": 11,
+    "retention_pct": 0.12
+  },
+  {
+    "cohort": "2017-03-01",
+    "month_index": 12,
+    "retention_pct": 0.2
+  },
+  {
+    "cohort": "2017-04-01",
+    "month_index": 1,
+    "retention_pct": 0.62
+  },
+  {
+    "cohort": "2017-04-01",
+    "month_index": 2,
+    "retention_pct": 0.22
+  },
+  {
+    "cohort": "2017-04-01",
+    "month_index": 3,
+    "retention_pct": 0.18
+  },
+  {
+    "cohort": "2017-04-01",
+    "month_index": 4,
+    "retention_pct": 0.27
+  },
+  {
+    "cohort": "2017-04-01",
+    "month_index": 5,
+    "retention_pct": 0.27
+  },
+  {
+    "cohort": "2017-04-01",
+    "month_index": 6,
+    "retention_pct": 0.35
+  },
+  {
+    "cohort": "2017-04-01",
+    "month_index": 7,
+    "retention_pct": 0.31
+  },
+  {
+    "cohort": "2017-04-01",
+    "month_index": 8,
+    "retention_pct": 0.31
+  },
+  {
+    "cohort": "2017-04-01",
+    "month_index": 9,
+    "retention_pct": 0.18
+  },
+  {
+    "cohort": "2017-04-01",
+    "month_index": 10,
+    "retention_pct": 0.27
+  },
+  {
+    "cohort": "2017-04-01",
+    "month_index": 11,
+    "retention_pct": 0.09
+  },
+  {
+    "cohort": "2017-04-01",
+    "month_index": 12,
+    "retention_pct": 0.04
+  },
+  {
+    "cohort": "2017-05-01",
+    "month_index": 1,
+    "retention_pct": 0.46
+  },
+  {
+    "cohort": "2017-05-01",
+    "month_index": 2,
+    "retention_pct": 0.46
+  },
+  {
+    "cohort": "2017-05-01",
+    "month_index": 3,
+    "retention_pct": 0.29
+  },
+  {
+    "cohort": "2017-05-01",
+    "month_index": 4,
+    "retention_pct": 0.29
+  },
+  {
+    "cohort": "2017-05-01",
+    "month_index": 5,
+    "retention_pct": 0.32
+  },
+  {
+    "cohort": "2017-05-01",
+    "month_index": 6,
+    "retention_pct": 0.41
+  },
+  {
+    "cohort": "2017-05-01",
+    "month_index": 7,
+    "retention_pct": 0.14
+  },
+  {
+    "cohort": "2017-05-01",
+    "month_index": 8,
+    "retention_pct": 0.26
+  },
+  {
+    "cohort": "2017-05-01",
+    "month_index": 9,
+    "retention_pct": 0.26
+  },
+  {
+    "cohort": "2017-05-01",
+    "month_index": 10,
+    "retention_pct": 0.26
+  },
+  {
+    "cohort": "2017-05-01",
+    "month_index": 11,
+    "retention_pct": 0.35
+  },
+  {
+    "cohort": "2017-05-01",
+    "month_index": 12,
+    "retention_pct": 0.23
+  },
+  {
+    "cohort": "2017-06-01",
+    "month_index": 1,
+    "retention_pct": 0.49
+  },
+  {
+    "cohort": "2017-06-01",
+    "month_index": 2,
+    "retention_pct": 0.4
+  },
+  {
+    "cohort": "2017-06-01",
+    "month_index": 3,
+    "retention_pct": 0.43
+  },
+  {
+    "cohort": "2017-06-01",
+    "month_index": 4,
+    "retention_pct": 0.3
+  },
+  {
+    "cohort": "2017-06-01",
+    "month_index": 5,
+    "retention_pct": 0.4
+  },
+  {
+    "cohort": "2017-06-01",
+    "month_index": 6,
+    "retention_pct": 0.36
+  },
+  {
+    "cohort": "2017-06-01",
+    "month_index": 7,
+    "retention_pct": 0.23
+  },
+  {
+    "cohort": "2017-06-01",
+    "month_index": 8,
+    "retention_pct": 0.13
+  },
+  {
+    "cohort": "2017-06-01",
+    "month_index": 9,
+    "retention_pct": 0.2
+  },
+  {
+    "cohort": "2017-06-01",
+    "month_index": 10,
+    "retention_pct": 0.3
+  },
+  {
+    "cohort": "2017-06-01",
+    "month_index": 11,
+    "retention_pct": 0.36
+  },
+  {
+    "cohort": "2017-06-01",
+    "month_index": 12,
+    "retention_pct": 0.16
+  },
+  {
+    "cohort": "2017-07-01",
+    "month_index": 1,
+    "retention_pct": 0.53
+  },
+  {
+    "cohort": "2017-07-01",
+    "month_index": 2,
+    "retention_pct": 0.35
+  },
+  {
+    "cohort": "2017-07-01",
+    "month_index": 3,
+    "retention_pct": 0.24
+  },
+  {
+    "cohort": "2017-07-01",
+    "month_index": 4,
+    "retention_pct": 0.29
+  },
+  {
+    "cohort": "2017-07-01",
+    "month_index": 5,
+    "retention_pct": 0.21
+  },
+  {
+    "cohort": "2017-07-01",
+    "month_index": 6,
+    "retention_pct": 0.32
+  },
+  {
+    "cohort": "2017-07-01",
+    "month_index": 7,
+    "retention_pct": 0.11
+  },
+  {
+    "cohort": "2017-07-01",
+    "month_index": 8,
+    "retention_pct": 0.19
+  },
+  {
+    "cohort": "2017-07-01",
+    "month_index": 9,
+    "retention_pct": 0.27
+  },
+  {
+    "cohort": "2017-07-01",
+    "month_index": 10,
+    "retention_pct": 0.21
+  },
+  {
+    "cohort": "2017-07-01",
+    "month_index": 11,
+    "retention_pct": 0.29
+  },
+  {
+    "cohort": "2017-07-01",
+    "month_index": 12,
+    "retention_pct": 0.13
+  },
+  {
+    "cohort": "2017-08-01",
+    "month_index": 1,
+    "retention_pct": 0.69
+  },
+  {
+    "cohort": "2017-08-01",
+    "month_index": 2,
+    "retention_pct": 0.35
+  },
+  {
+    "cohort": "2017-08-01",
+    "month_index": 3,
+    "retention_pct": 0.27
+  },
+  {
+    "cohort": "2017-08-01",
+    "month_index": 4,
+    "retention_pct": 0.35
+  },
+  {
+    "cohort": "2017-08-01",
+    "month_index": 5,
+    "retention_pct": 0.52
+  },
+  {
+    "cohort": "2017-08-01",
+    "month_index": 6,
+    "retention_pct": 0.3
+  },
+  {
+    "cohort": "2017-08-01",
+    "month_index": 7,
+    "retention_pct": 0.27
+  },
+  {
+    "cohort": "2017-08-01",
+    "month_index": 8,
+    "retention_pct": 0.15
+  },
+  {
+    "cohort": "2017-08-01",
+    "month_index": 9,
+    "retention_pct": 0.15
+  },
+  {
+    "cohort": "2017-08-01",
+    "month_index": 10,
+    "retention_pct": 0.25
+  },
+  {
+    "cohort": "2017-08-01",
+    "month_index": 11,
+    "retention_pct": 0.2
+  },
+  {
+    "cohort": "2017-08-01",
+    "month_index": 12,
+    "retention_pct": 0.12
+  },
+  {
+    "cohort": "2017-09-01",
+    "month_index": 1,
+    "retention_pct": 0.7
+  },
+  {
+    "cohort": "2017-09-01",
+    "month_index": 2,
+    "retention_pct": 0.55
+  },
+  {
+    "cohort": "2017-09-01",
+    "month_index": 3,
+    "retention_pct": 0.27
+  },
+  {
+    "cohort": "2017-09-01",
+    "month_index": 4,
+    "retention_pct": 0.45
+  },
+  {
+    "cohort": "2017-09-01",
+    "month_index": 5,
+    "retention_pct": 0.22
+  },
+  {
+    "cohort": "2017-09-01",
+    "month_index": 6,
+    "retention_pct": 0.22
+  },
+  {
+    "cohort": "2017-09-01",
+    "month_index": 7,
+    "retention_pct": 0.25
+  },
+  {
+    "cohort": "2017-09-01",
+    "month_index": 8,
+    "retention_pct": 0.27
+  },
+  {
+    "cohort": "2017-09-01",
+    "month_index": 9,
+    "retention_pct": 0.17
+  },
+  {
+    "cohort": "2017-09-01",
+    "month_index": 10,
+    "retention_pct": 0.25
+  },
+  {
+    "cohort": "2017-09-01",
+    "month_index": 11,
+    "retention_pct": 0.07
+  },
+  {
+    "cohort": "2017-10-01",
+    "month_index": 1,
+    "retention_pct": 0.72
+  },
+  {
+    "cohort": "2017-10-01",
+    "month_index": 2,
+    "retention_pct": 0.25
+  },
+  {
+    "cohort": "2017-10-01",
+    "month_index": 3,
+    "retention_pct": 0.09
+  },
+  {
+    "cohort": "2017-10-01",
+    "month_index": 4,
+    "retention_pct": 0.23
+  },
+  {
+    "cohort": "2017-10-01",
+    "month_index": 5,
+    "retention_pct": 0.21
+  },
+  {
+    "cohort": "2017-10-01",
+    "month_index": 6,
+    "retention_pct": 0.21
+  },
+  {
+    "cohort": "2017-10-01",
+    "month_index": 7,
+    "retention_pct": 0.37
+  },
+  {
+    "cohort": "2017-10-01",
+    "month_index": 8,
+    "retention_pct": 0.28
+  },
+  {
+    "cohort": "2017-10-01",
+    "month_index": 9,
+    "retention_pct": 0.18
+  },
+  {
+    "cohort": "2017-10-01",
+    "month_index": 10,
+    "retention_pct": 0.21
+  },
+  {
+    "cohort": "2017-11-01",
+    "month_index": 1,
+    "retention_pct": 0.57
+  },
+  {
+    "cohort": "2017-11-01",
+    "month_index": 2,
+    "retention_pct": 0.37
+  },
+  {
+    "cohort": "2017-11-01",
+    "month_index": 3,
+    "retention_pct": 0.17
+  },
+  {
+    "cohort": "2017-11-01",
+    "month_index": 4,
+    "retention_pct": 0.17
+  },
+  {
+    "cohort": "2017-11-01",
+    "month_index": 5,
+    "retention_pct": 0.18
+  },
+  {
+    "cohort": "2017-11-01",
+    "month_index": 6,
+    "retention_pct": 0.11
+  },
+  {
+    "cohort": "2017-11-01",
+    "month_index": 7,
+    "retention_pct": 0.18
+  },
+  {
+    "cohort": "2017-11-01",
+    "month_index": 8,
+    "retention_pct": 0.13
+  },
+  {
+    "cohort": "2017-11-01",
+    "month_index": 9,
+    "retention_pct": 0.06
+  },
+  {
+    "cohort": "2017-12-01",
+    "month_index": 1,
+    "retention_pct": 0.21
+  },
+  {
+    "cohort": "2017-12-01",
+    "month_index": 2,
+    "retention_pct": 0.28
+  },
+  {
+    "cohort": "2017-12-01",
+    "month_index": 3,
+    "retention_pct": 0.34
+  },
+  {
+    "cohort": "2017-12-01",
+    "month_index": 4,
+    "retention_pct": 0.26
+  },
+  {
+    "cohort": "2017-12-01",
+    "month_index": 5,
+    "retention_pct": 0.21
+  },
+  {
+    "cohort": "2017-12-01",
+    "month_index": 6,
+    "retention_pct": 0.17
+  },
+  {
+    "cohort": "2017-12-01",
+    "month_index": 7,
+    "retention_pct": 0.02
+  },
+  {
+    "cohort": "2017-12-01",
+    "month_index": 8,
+    "retention_pct": 0.19
+  },
+  {
+    "cohort": "2018-01-01",
+    "month_index": 1,
+    "retention_pct": 0.34
+  },
+  {
+    "cohort": "2018-01-01",
+    "month_index": 2,
+    "retention_pct": 0.37
+  },
+  {
+    "cohort": "2018-01-01",
+    "month_index": 3,
+    "retention_pct": 0.29
+  },
+  {
+    "cohort": "2018-01-01",
+    "month_index": 4,
+    "retention_pct": 0.29
+  },
+  {
+    "cohort": "2018-01-01",
+    "month_index": 5,
+    "retention_pct": 0.16
+  },
+  {
+    "cohort": "2018-01-01",
+    "month_index": 6,
+    "retention_pct": 0.18
+  },
+  {
+    "cohort": "2018-01-01",
+    "month_index": 7,
+    "retention_pct": 0.23
+  },
+  {
+    "cohort": "2018-02-01",
+    "month_index": 1,
+    "retention_pct": 0.35
+  },
+  {
+    "cohort": "2018-02-01",
+    "month_index": 2,
+    "retention_pct": 0.4
+  },
+  {
+    "cohort": "2018-02-01",
+    "month_index": 3,
+    "retention_pct": 0.3
+  },
+  {
+    "cohort": "2018-02-01",
+    "month_index": 4,
+    "retention_pct": 0.25
+  },
+  {
+    "cohort": "2018-02-01",
+    "month_index": 5,
+    "retention_pct": 0.22
+  },
+  {
+    "cohort": "2018-02-01",
+    "month_index": 6,
+    "retention_pct": 0.21
+  },
+  {
+    "cohort": "2018-03-01",
+    "month_index": 1,
+    "retention_pct": 0.4
+  },
+  {
+    "cohort": "2018-03-01",
+    "month_index": 2,
+    "retention_pct": 0.3
+  },
+  {
+    "cohort": "2018-03-01",
+    "month_index": 3,
+    "retention_pct": 0.3
+  },
+  {
+    "cohort": "2018-03-01",
+    "month_index": 4,
+    "retention_pct": 0.12
+  },
+  {
+    "cohort": "2018-03-01",
+    "month_index": 5,
+    "retention_pct": 0.12
+  }
+]

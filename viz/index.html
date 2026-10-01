@@ -1,0 +1,125 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Olist E-commerce Analytics</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+body{background:radial-gradient(circle at 15% 0%,#12343b,#0a0d14 55%) fixed;color:#e8eaf0}
+.glass{background:rgba(255,255,255,.05);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);border-radius:18px}
+.grad{background:linear-gradient(90deg,#3ddc97,#6c8cff,#f5a623);-webkit-background-clip:text;color:transparent}
+.chart{height:320px}
+</style></head>
+<body class="font-sans"><main class="max-w-6xl mx-auto px-5 py-10">
+
+<header class="text-center mb-10">
+  <p class="text-sm tracking-widest text-emerald-400 mb-2">MYSQL STAR SCHEMA → PYTHON → ECHARTS</p>
+  <h1 class="text-5xl font-extrabold grad">Olist E-commerce Analytics</h1>
+  <p class="text-gray-400 mt-3">Brazilian marketplace orders, 2017 to 2018. Currency is Brazilian real (R$).</p>
+</header>
+
+<section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+  <div class="glass p-5 text-center"><b id="k1" class="text-3xl text-emerald-400">-</b><p class="text-xs text-gray-400">Revenue</p></div>
+  <div class="glass p-5 text-center"><b id="k2" class="text-3xl text-blue-400">-</b><p class="text-xs text-gray-400">Orders</p></div>
+  <div class="glass p-5 text-center"><b id="k3" class="text-3xl text-amber-400">-</b><p class="text-xs text-gray-400">Unique customers</p></div>
+  <div class="glass p-5 text-center"><b id="k4" class="text-3xl text-pink-400">-</b><p class="text-xs text-gray-400">Avg review (of 5)</p></div>
+</section>
+
+<h2 class="text-3xl font-bold mb-1">📈 Revenue</h2>
+<p class="text-gray-400 mb-5">How sales grew and what sold.</p>
+<div class="grid md:grid-cols-2 gap-5 mb-12">
+  <div class="glass p-4"><h3 class="font-semibold">Monthly revenue</h3><p class="text-xs text-gray-400">Jan 2017 to Aug 2018, hover for growth vs previous month</p><div id="c1" class="chart"></div></div>
+  <div class="glass p-4"><h3 class="font-semibold">Top 10 categories</h3><p class="text-xs text-gray-400">Total revenue, R$</p><div id="c2" class="chart"></div></div>
+</div>
+
+<h2 class="text-3xl font-bold mb-1">👥 Customers</h2>
+<p class="text-gray-400 mb-5">Who buys, and whether they come back.</p>
+<div class="grid md:grid-cols-2 gap-5 mb-12">
+  <div class="glass p-4"><h3 class="font-semibold">RFM segments</h3><p class="text-xs text-gray-400">Recency, frequency, monetary scoring with NTILE</p><div id="c3" class="chart"></div></div>
+  <div class="glass p-4"><h3 class="font-semibold">Cohort retention heatmap</h3><p class="text-xs text-gray-400">% of a cohort buying again, by months since first order</p><div id="c4" class="chart"></div></div>
+</div>
+
+<h2 class="text-3xl font-bold mb-1">📦 Products & sellers</h2>
+<p class="text-gray-400 mb-5">Where the money concentrates, and who delivers late.</p>
+<div class="grid md:grid-cols-2 gap-5 mb-5">
+  <div class="glass p-4"><h3 class="font-semibold">ABC analysis</h3><p class="text-xs text-gray-400">Revenue by class: A = first 80%, B = next 15%, C = last 5%</p><div id="c5" class="chart"></div></div>
+  <div class="glass p-4"><h3 class="font-semibold">Seller delivery vs estimate</h3><p class="text-xs text-gray-400">Avg days late (negative = early), sellers in 4 quartiles</p><div id="c6" class="chart"></div></div>
+</div>
+<div class="glass p-5 mb-12"><h3 class="font-semibold mb-3">Top 3 categories per year</h3><div id="yr" class="grid md:grid-cols-3 gap-4 text-sm"></div></div>
+
+<section class="glass p-6 mb-8">
+  <h2 class="text-xl font-bold mb-2">🛠️ What I solved</h2>
+  <ul class="text-gray-300 text-sm space-y-1 list-disc ml-5">
+    <li>Rebuilt a Kaggle T-SQL blueprint in MySQL: staging, clean tables, star schema, views.</li>
+    <li>Fixed payment double-counting by using two fact tables at different grains (per item and per order).</li>
+    <li>Fixed RFM logic: frequency scored with CASE (most customers ordered once), unreachable segment rule, hardcoded date.</li>
+    <li>Found that retention is under 1% a month after first order, so repeat purchase is the real problem.</li>
+    <li>Used window functions: ROW_NUMBER, RANK with PARTITION BY, LAG, NTILE, running totals.</li>
+  </ul>
+</section>
+<footer class="text-center text-gray-500 text-xs pb-6">Built by Yash · MySQL · Python · ECharts · Inspired by a Kaggle notebook on the Olist dataset</footer>
+</main>
+
+<script>
+const P=["#3ddc97","#6c8cff","#f5a623","#ff6b9d","#b88cff","#4dd0e1"];
+const J=u=>fetch(u).then(r=>r.json());
+const mk=(id,o)=>{const c=echarts.init(document.getElementById(id),"dark");
+  c.setOption({backgroundColor:"transparent",color:P,animationDuration:1000,...o});
+  addEventListener("resize",()=>c.resize());};
+const n=x=>Number(x).toLocaleString();
+
+J("data/kpis.json").then(([k])=>{
+  k1.textContent="R$"+(k.revenue/1e6).toFixed(1)+"M";
+  k2.textContent=n(k.orders); k3.textContent=n(k.customers); k4.textContent=k.avg_review;
+});
+
+J("data/monthly_revenue.json").then(d=>mk("c1",{
+  tooltip:{trigger:"axis",formatter:p=>{const r=d[p[0].dataIndex];
+    return `<b>${r.label}</b><br>R$${n(r.value)}<br>${n(r.orders)} orders<br>vs prev month: ${r.mom_growth_pct??"-"}%`}},
+  grid:{left:60,right:15,top:15,bottom:50},
+  xAxis:{type:"category",data:d.map(r=>r.label),axisLabel:{rotate:45,fontSize:10}},yAxis:{type:"value"},
+  series:[{type:"line",smooth:true,symbolSize:7,lineStyle:{width:3},data:d.map(r=>r.value),
+    areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:"#3ddc9988"},{offset:1,color:"#3ddc9900"}])}}]}));
+
+J("data/top_categories.json").then(d=>mk("c2",{
+  tooltip:{formatter:p=>`<b>${p.name}</b><br>R$${n(p.value)}`},
+  grid:{left:120,right:50,top:5,bottom:5},xAxis:{type:"value",show:false},
+  yAxis:{type:"category",inverse:true,data:d.map(r=>r.label),axisLabel:{fontSize:10}},
+  series:[{type:"bar",barWidth:16,data:d.map(r=>r.value),itemStyle:{borderRadius:[0,8,8,0],
+    color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:"#6c8cff"},{offset:1,color:"#3ddc97"}])},
+    label:{show:true,position:"right",color:"#ccc",fontSize:10,formatter:p=>(p.value/1e3).toFixed(0)+"k"}}]}));
+
+J("data/rfm_segments.json").then(d=>mk("c3",{
+  tooltip:{formatter:p=>{const r=d[p.dataIndex];return `<b>${r.label}</b><br>${n(r.value)} customers<br>avg spend R$${n(r.avg_spend)}`}},
+  legend:{bottom:0,textStyle:{fontSize:10}},
+  series:[{type:"pie",radius:["40%","68%"],center:["50%","44%"],itemStyle:{borderRadius:6,borderColor:"#0a0d14",borderWidth:2},
+    label:{color:"#ddd",fontSize:10},data:d.map(r=>({name:r.label,value:r.value}))}]}));
+
+J("data/cohort.json").then(d=>{
+  const co=[...new Set(d.map(r=>r.cohort))], mo=[...Array(12)].map((_,i)=>i+1);
+  mk("c4",{tooltip:{formatter:p=>`Cohort ${co[p.data[1]].slice(0,7)}<br>Month ${mo[p.data[0]]}: <b>${p.data[2]}%</b>`},
+    grid:{left:70,right:15,top:10,bottom:55},
+    xAxis:{type:"category",data:mo,name:"months after first order",nameLocation:"middle",nameGap:28},
+    yAxis:{type:"category",data:co.map(c=>c.slice(0,7)),axisLabel:{fontSize:9}},
+    visualMap:{min:0,max:Math.max(...d.map(r=>r.retention_pct)),orient:"horizontal",left:"center",bottom:0,
+      inRange:{color:["#14213d","#6c8cff","#3ddc97","#f5a623"]},textStyle:{color:"#ccc"},itemWidth:10,itemHeight:100},
+    series:[{type:"heatmap",data:d.map(r=>[mo.indexOf(r.month_index),co.indexOf(r.cohort),r.retention_pct]),
+      itemStyle:{borderColor:"#0a0d14",borderWidth:1}}]});
+});
+
+J("data/abc.json").then(d=>mk("c5",{
+  tooltip:{formatter:p=>{const r=d[p.dataIndex];return `<b>Class ${r.label}</b><br>${r.value} categories<br>R$${n(r.revenue)}`}},
+  grid:{left:70,right:15,top:20,bottom:30},xAxis:{type:"category",data:d.map(r=>"Class "+r.label+" ("+r.value+" cats)")},yAxis:{type:"value"},
+  series:[{type:"bar",barWidth:60,data:d.map((r,i)=>({value:r.revenue,itemStyle:{color:[P[0],P[1],P[2]][i],borderRadius:[10,10,0,0]}})),
+    label:{show:true,position:"top",color:"#fff",formatter:p=>"R$"+(p.value/1e6).toFixed(1)+"M"}}]}));
+
+J("data/seller_quartiles.json").then(d=>mk("c6",{
+  tooltip:{formatter:p=>{const r=d[p.dataIndex];return `<b>${r.label}</b><br>${r.sellers} sellers<br>avg ${r.value} days vs estimate`}},
+  grid:{left:50,right:15,top:20,bottom:30},xAxis:{type:"category",data:d.map(r=>r.label+" ("+r.sellers+" sellers)")},yAxis:{type:"value",name:"days"},
+  series:[{type:"bar",barWidth:50,data:d.map(r=>({value:r.value,itemStyle:{color:r.value<0?P[0]:P[3],borderRadius:[8,8,0,0]}})),
+    label:{show:true,position:"top",color:"#fff"}}]}));
+
+J("data/categories_by_year.json").then(d=>{
+  yr.innerHTML=[...new Set(d.map(r=>r.year))].map(y=>`<div><p class="font-bold text-emerald-400 mb-1">${y}</p>`+
+    d.filter(r=>r.year===y).map(r=>`<p>${r.rnk}. ${r.category} <span class="text-gray-400">R$${n(r.revenue)}</span></p>`).join("")+`</div>`).join("");
+});
+</script></body></html>

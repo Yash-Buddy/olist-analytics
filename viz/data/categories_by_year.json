@@ -1,0 +1,56 @@
+[
+  {
+    "year": 2016,
+    "category": "furniture_decor",
+    "revenue": 5881.0,
+    "rnk": 1
+  },
+  {
+    "year": 2016,
+    "category": "perfumery",
+    "revenue": 5689.0,
+    "rnk": 2
+  },
+  {
+    "year": 2016,
+    "category": "health_beauty",
+    "revenue": 4687.0,
+    "rnk": 3
+  },
+  {
+    "year": 2017,
+    "category": "bed_bath_table",
+    "revenue": 498440.0,
+    "rnk": 1
+  },
+  {
+    "year": 2017,
+    "category": "watches_gifts",
+    "revenue": 492795.0,
+    "rnk": 2
+  },
+  {
+    "year": 2017,
+    "category": "health_beauty",
+    "revenue": 481756.0,
+    "rnk": 3
+  },
+  {
+    "year": 2018,
+    "category": "health_beauty",
+    "revenue": 772238.0,
+    "rnk": 1
+  },
+  {
+    "year": 2018,
+    "category": "watches_gifts",
+    "revenue": 708851.0,
+    "rnk": 2
+  },
+  {
+    "year": 2018,
+    "category": "bed_bath_table",
+    "revenue": 538069.0,
+    "rnk": 3
+  }
+]

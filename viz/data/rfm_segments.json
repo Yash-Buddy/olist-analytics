@@ -1,0 +1,32 @@
+[
+  {
+    "label": "Need Attention",
+    "value": 36181,
+    "avg_spend": 136.0
+  },
+  {
+    "label": "New",
+    "value": 36142,
+    "avg_spend": 140.0
+  },
+  {
+    "label": "Lost",
+    "value": 18234,
+    "avg_spend": 138.0
+  },
+  {
+    "label": "Loyal",
+    "value": 1686,
+    "avg_spend": 252.0
+  },
+  {
+    "label": "At Risk",
+    "value": 993,
+    "avg_spend": 249.0
+  },
+  {
+    "label": "Champions",
+    "value": 122,
+    "avg_spend": 463.0
+  }
+]
